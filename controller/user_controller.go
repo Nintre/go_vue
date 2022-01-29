@@ -9,6 +9,7 @@ import (
 	"gorm.io/gorm"
 
 	"hutaiyi.study/gin_vue/common"
+	"hutaiyi.study/gin_vue/dto"
 	"hutaiyi.study/gin_vue/model"
 	"hutaiyi.study/gin_vue/util"
 )
@@ -106,7 +107,7 @@ func Login(ctx *gin.Context) {
 
 func Info(c *gin.Context) {
 	user, _ := c.Get("user")
-	c.JSON(http.StatusOK, gin.H{"code": 200, "data": gin.H{"user": user}})
+	c.JSON(http.StatusOK, gin.H{"code": 200, "data": gin.H{"user": dto.ToUserDto(user.(model.User))}})
 }
 
 func isTelephoneExist(db *gorm.DB, telephone string) bool {
